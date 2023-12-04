@@ -21,7 +21,7 @@ echo "Building libaray: npm ci && npm run build -- $project_name" && npm ci && n
 echo
 pushd dist/$project_folder
 echo "packaging and pushing the generated code"
-echo npm publish . --access public
+npm publish . --access public
 popd
 
 popd
