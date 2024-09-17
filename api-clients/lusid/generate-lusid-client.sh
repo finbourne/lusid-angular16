@@ -1,8 +1,11 @@
 #!/bin/bash 
 
+set -euo pipefail
+
 service=$1
 ngVersion=$2
 useLocalCli="false"
+localSwaggerUrl="" # "../../swagger.json"
 
 baseUrl="https://www.lusid.com"
 swaggerUrl=$baseUrl/$service/swagger/v0/swagger.json
@@ -20,7 +23,10 @@ rm -rf $scriptDir/$outputDir
 # generate the code
 if [ $useLocalCli = "true" ]
 then
-  echo "Generating using local openapi-generator-cli"
+  if [ $localSwaggerUrl ]; then
+    swaggerUrl=$localSwaggerUrl
+  fi
+  echo "Generating using local openapi-generator-cli; swaggerUrl=${swaggerUrl}"
   openapi-generator-cli version-manager set $generatorVersion
   openapi-generator-cli generate \
         -g typescript-angular \
