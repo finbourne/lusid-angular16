@@ -9,7 +9,7 @@ project_name=@$project_folder
 service=api
 
 pushd src/lib
-echo "generating files"
+echo "generating files for service=${service}; ngVersion=${ngVersion}"
 $root/api-clients/lusid/generate-lusid-client.sh $service $ngVersion
 popd
 
